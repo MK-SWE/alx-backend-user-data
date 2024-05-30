@@ -3,16 +3,16 @@
     The logging builtin package
 """
 from typing import List
+import re
 import logging
-from re import sub
 
 
 def filter_datum(fields: List[str], redaction: str,
-                 message: str, separator: str):
+                 message: str, separator: str) -> str:
     """ Replaces sensitive information in a message """
     for field in fields:
-        msg = sub(f'{field}=.*?{separator}',
-                  f'{field}={redaction}{separator}', message)
+        msg = re.sub(field+'=.*?'+separator,
+                      field+'='+redaction+separator, message)
     return msg
 
 
@@ -30,6 +30,7 @@ class RedactingFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         """Formate log messages"""
-        record.msg = filter_datum(self.fields, self.REDACTION,
-                                  record.getMessage(), self.SEPARATOR)
-        return super(RedactingFormatter, self).format(record)
+        msg = super(RedactingFormatter, self).format(record)
+        redacted = filter_datum(self.fields, self.REDACTION,
+                                msg, self.SEPARATOR)
+        return redacted
