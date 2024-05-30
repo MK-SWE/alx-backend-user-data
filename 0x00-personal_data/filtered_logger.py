@@ -12,8 +12,9 @@ def filter_datum(fields: List[str], redaction: str,
     """ Replaces sensitive information in a message """
     for field in fields:
         msg = sub(f'{field}=.*?{separator}',
-                      f'{field}={redaction}{separator}', message)
+                  f'{field}={redaction}{separator}', message)
     return msg
+
 
 class RedactingFormatter(logging.Formatter):
     """Redacting Formatter class"""
@@ -23,6 +24,7 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
+        """Init the class"""
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
