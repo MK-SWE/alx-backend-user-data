@@ -14,7 +14,7 @@ def filter_datum(fields: List[str], redaction: str,
     """ Replaces sensitive information in a message """
     for field in fields:
         msg = re.sub(f'{field}=.*?{separator}',
-                         f'{field}={redaction}{separator}', message)
+                     f'{field}={redaction}{separator}', message)
     return msg
 
 
