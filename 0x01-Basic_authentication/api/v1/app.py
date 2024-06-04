@@ -1,4 +1,4 @@
-#!/usr/bin/env 
+#!/usr/bin/env
 """
 Route module for the API
 """
