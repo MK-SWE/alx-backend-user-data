@@ -41,7 +41,9 @@ def forbidden(error) -> str:
 
 
 @app.before_request
-def before_request_func() -> any:
+def request_middleware() -> any:
+    """ Implement before request middleware
+    """
     if auth is None:
         return
     paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
