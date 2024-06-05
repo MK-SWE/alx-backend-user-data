@@ -5,6 +5,7 @@ Basic auth module for the API
 from api.v1.auth.auth import Auth
 from models.user import User
 import base64
+from typing import TypeVar
 
 
 class BasicAuth(Auth):
@@ -54,8 +55,7 @@ class BasicAuth(Auth):
         email, password = decoded_base64_authorization_header.split(":")
         return (email, password)
 
-    def user_object_from_credentials(self,
-                                     user_email: str,
+    def user_object_from_credentials(self, user_email: str,
                                      user_pwd: str) -> TypeVar('User'):
         """ returns the User instance based on his email and password.
         """
