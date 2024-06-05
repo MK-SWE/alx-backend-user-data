@@ -9,3 +9,13 @@ class BasicAuth(Auth):
     """
     The template for basic authentication module
     """
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
+        if authorization_header is None:
+            return None
+        if isinstance(authorization_header, str):
+            if authorization_header[0:6] != "Basic ":
+                return None
+            return authorization_header[6:]
+        else:
+            return None
