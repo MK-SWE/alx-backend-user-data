@@ -11,6 +11,7 @@ class SessionAuth(Auth):
         The class that manage the session authentication mechanism
     """
     user_id_by_session_id = {}
+
     def create_session(self, user_id: str = None) -> str:
         """ Generate Session
         """
