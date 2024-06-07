@@ -2,7 +2,7 @@
 """Module of session authenticating views.
 """
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import jsonify, request, abort
 from models.user import User
 from os import getenv
 from typing import Tuple
@@ -32,3 +32,13 @@ def login() -> Tuple[str, int]:
         session.set_cookie(getenv("SESSION_NAME"), session_id)
         return session
     return jsonify({"error": "wrong password"}), 401
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+def logout() -> Tuple[str, int]:
+    """ Logout User
+    """
+    from api.v1.app import auth
+    if not auth.destroy_session(request):
+        abort(404)
+    return jsonify({})
