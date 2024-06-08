@@ -3,6 +3,7 @@
 """
 from models.base import Base
 
+
 class UserSession(Base):
     """ UserSession database storage
     """

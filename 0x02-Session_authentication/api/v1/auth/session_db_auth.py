@@ -10,7 +10,7 @@ class SessionDBAuth(SessionExpAuth):
     """ Store Session data in a database
     """
     def create_session(self, user_id=None):
-        """ Overload the create_session function 
+        """ Overload the create_session function
         """
         session_id = super().create_session(user_id)
         if not session_id:
