@@ -2,7 +2,6 @@
 """
 Session db module for the API
 """
-from tkinter import NO
 from api.v1.auth.session_exp_auth import SessionExpAuth
 from models.user_session import UserSession
 
@@ -27,9 +26,6 @@ class SessionDBAuth(SessionExpAuth):
     def user_id_for_session_id(self, session_id=None):
         """ Overload user_id_for_session_id function
         """
-
-        if session_id is None:
-            return None
         user_id = UserSession.search({"session_id": session_id})
         if user_id:
             return user_id
