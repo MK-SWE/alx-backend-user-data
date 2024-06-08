@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Basic auth module for the API
+Session expiration auth module for the API
 """
 from api.v1.auth.session_auth import SessionAuth
 from os import getenv
