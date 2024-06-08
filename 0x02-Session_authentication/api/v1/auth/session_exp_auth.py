@@ -17,21 +17,21 @@ class SessionExpAuth(SessionAuth):
     def __init__(self):
         """Init the class"""
         try:
-            duration = int(getenv('SESSION_DURATION'))
+            session_duration = int(getenv('SESSION_DURATION'))
         except Exception:
-            duration = 0
-        self.session_duration = duration
+            session_duration = 0
+        self.session_duration = session_duration
 
     def create_session(self, user_id=None):
         """Create a session with experation"""
         session_id = super().create_session(user_id)
         if session_id is None:
             return None
-        session_data = {
+        session_dictionary = {
             "user_id": user_id,
             "created_at": datetime.now()
         }
-        self.user_id_by_session_id[session_id] = session_data
+        self.user_id_by_session_id[session_id] = session_dictionary
         return session_id
 
 def user_id_for_session_id(self, session_id=None):
