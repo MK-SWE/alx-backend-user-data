@@ -27,6 +27,7 @@ class SessionDBAuth(SessionExpAuth):
     def user_id_for_session_id(self, session_id=None):
         """ Overload user_id_for_session_id function
         """
+
         if session_id is None:
             return None
         user_id = UserSession.search({"session_id": session_id})
