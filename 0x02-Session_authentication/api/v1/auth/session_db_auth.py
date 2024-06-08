@@ -25,7 +25,7 @@ class SessionDBAuth(SessionExpAuth):
         return session_id
 
     def user_id_for_session_id(self, session_id=None):
-        """ Overload user_id_for_session_id function
+        """Overload user_id_for_session_id function
         """
         if session_id is None:
             return None
