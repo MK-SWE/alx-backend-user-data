@@ -5,18 +5,12 @@ import bcrypt
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
-
-
-def _hash_password(password: str) -> bytes:
-    """Create new hashed password using bcrypt
-    """
-    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+from uuid import uuid4
 
 
 class Auth:
     """Auth class to interact with the authentication database.
     """
-
     def __init__(self):
         self._db = DB()
 
@@ -37,3 +31,15 @@ class Auth:
         except NoResultFound:
             return False
         return bcrypt.checkpw(password.encode(), user.hashed_password)
+
+
+def _hash_password(password: str) -> bytes:
+    """Create new hashed password using bcrypt
+    """
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+
+def _generate_uuid() -> str:
+    """Generate UUIDs
+    """
+    return str(uuid4())
