@@ -1,8 +1,13 @@
+#!/usr/bin/env python3
+"""Basic flask app
+"""
 from flask import Flask, jsonify
 app = Flask(__name__)
 
 @app.route("/")
-def home():
+def home() -> str:
+    """Home page route
+    """
     return jsonify({"message": "Bienvenue"})
 
 if __name__ == "__main__":
