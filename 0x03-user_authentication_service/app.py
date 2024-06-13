@@ -2,10 +2,10 @@
 """Basic flask app
 """
 from flask import (
-    Flask, 
-    jsonify, 
-    request, 
-    abort, 
+    Flask,
+    jsonify,
+    request,
+    abort,
     redirect
 )
 
@@ -49,6 +49,7 @@ def login() -> str:
         return response
     else:
         abort(401)
+
 
 @app.route("/sessions", methods=["DELETE"], strict_slashes=False)
 def logout() -> str:
