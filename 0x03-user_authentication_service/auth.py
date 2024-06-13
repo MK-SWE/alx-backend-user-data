@@ -6,6 +6,7 @@ from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
 from uuid import uuid4
+from typing import Union
 
 
 class Auth:
@@ -43,7 +44,7 @@ class Auth:
         except NoResultFound:
             return None
   
-    def get_user_from_session_id(self, session_id: str) -> User | None:
+    def get_user_from_session_id(self, session_id: str) -> Union[None | User]:
       """Find user by session ID
       """
       if session_id is None:
