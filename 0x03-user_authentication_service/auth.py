@@ -76,6 +76,19 @@ class Auth:
         self._db.update_user(user_id=user.id, reset_token=token)
         return token
 
+    def update_password(self, reset_token: str, password: str) -> None:
+        """Update user password in the database
+        """
+        try:
+            user = self._db.find_user_by(reset_token=reset_token)
+        except NoResultFound:
+            raise ValueError
+        pwd = _hash_password(password)
+        self._db.update_user(user_id=user.id,
+                             hashed_password=pwd,
+                             reset_token=None)
+        return None
+
 
 def _hash_password(password: str) -> bytes:
     """Create new hashed password using bcrypt
