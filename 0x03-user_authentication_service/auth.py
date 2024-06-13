@@ -2,11 +2,12 @@
 """Auth module
 """
 import bcrypt
-from db import DB
-from user import User
 from sqlalchemy.orm.exc import NoResultFound
 from uuid import uuid4
 from typing import Union
+
+from db import DB
+from user import User
 
 
 class Auth:
@@ -45,11 +46,15 @@ class Auth:
             return None
 
     def destroy_session(self, user_id: int) -> None:
-        """Destroy session
+        """Distroy session
         """
-        self._db.update_user(user_id=user_id, session_id=None)
+        try:
+            self._db.update_user(user_id, session_id=None)
+        except ValueError:
+            return None
+        return None
 
-    def get_user_from_session_id(self, session_id: str) -> Union[None | User]:
+    def get_user_from_session_id(self, session_id: str) -> Union[None, User]:
         """Find user by session ID
         """
         if session_id is None:
